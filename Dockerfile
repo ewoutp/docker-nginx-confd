@@ -1,4 +1,4 @@
-# nginx with confd
+# nginx with confd (and supervisord)
 FROM ewoutp/docker-nginx-curl
 
 # Install confd
@@ -8,3 +8,8 @@ RUN curl -L https://github.com/kelseyhightower/confd/releases/download/v$CONFD_V
 RUN chmod 0755 /usr/local/bin/confd
 RUN mkdir -p /etc/confd/conf.d
 RUN mkdir -p /etc/confd/templates
+
+# Install supervisor
+RUN rm /etc/mime.types
+RUN apt-get update && apt-get install -y supervisor && apt-get clean
+ADD ./supervisord.conf /etc/supervisord.conf
