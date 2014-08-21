@@ -10,6 +10,6 @@ RUN mkdir -p /etc/confd/conf.d
 RUN mkdir -p /etc/confd/templates
 
 # Install supervisor
-RUN rm /etc/mime.types
+RUN mv /etc/mime.types /etc/nginx.mime.types
 RUN apt-get update && apt-get install -y supervisor && apt-get clean
 ADD ./supervisord.conf /etc/supervisord.conf
